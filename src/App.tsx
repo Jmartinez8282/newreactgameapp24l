@@ -1,9 +1,13 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import ColorModeSwitch from "./components/ColorModeSwitch";
+
 import GameGrid from "./components/GameGrid";
+import GenreList from "./components/GenreList";
+import { useState } from "react";
+import { Genre } from "./hooks/useGenres";
 
 const App = () => {
+  const [selectedGenre, setSelectedGenre] = useState<Genre |null>(null)
   return (
     <>
       {/* create a responsive layout with Chakra UI Grid */}
@@ -19,9 +23,9 @@ const App = () => {
           </GridItem>
 
         <Show above="lg">
-          <GridItem area="aside">
+          <GridItem area="aside" padding={10}>
             {" "}
-            Aside
+           <GenreList onSelectedGenre={(genre) => setSelectedGenre(genre)}/>
           </GridItem>
         </Show>
 
