@@ -1,14 +1,20 @@
 ///All our imports we need
 
 import { SimpleGrid, Text } from "@chakra-ui/react";
-import useGames from "../hooks/useGames";
+import useGames, { Platform } from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
+import { Genre } from "../hooks/useGenres";
 
-const GameGrid = () => {
+interface Props {
+  selectedGenre: Genre | null;
+  selectedPlatform: Platform | null
+}
+
+const GameGrid = ({selectedGenre,selectedPlatform}:Props) => {
   //custom game hook
-  const { data, error, isLoading } = useGames();
+  const { data, error, isLoading } = useGames(selectedGenre,selectedPlatform);
   //We other helper function to add, delete or update data
 
   const skeleton = [

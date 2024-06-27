@@ -5,11 +5,12 @@ import  { Genre } from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/imageUrl";
 
 interface Props {
-    onSelectedGenre: (genre:Genre) => void
+    onSelectedGenre: (genre:Genre) => void;
+    selectedGenre: Genre | null
 }
 
 
-const GenreList = ({onSelectedGenre}:Props) => {
+const GenreList = ({onSelectedGenre,selectedGenre}:Props) => {
 
     ///usestates
     const {data,isLoading} = useData<Genre>('/genres')
@@ -27,7 +28,7 @@ const GenreList = ({onSelectedGenre}:Props) => {
         {data.map((genre) => <ListItem marginBottom={3} key={genre.id}>
         <HStack>
             <Image boxSize={16} borderRadius={4} src={getCroppedImageUrl(genre.image_background)}/>
-            <Button fontSize={'lg'} variant={'link'} onClick={() => onSelectedGenre(genre)
+            <Button color={genre.id === selectedGenre?.id ? 'blue.500': 'normal'} fontSize={'lg'} variant={'link'} onClick={() => onSelectedGenre(genre)
             }>{genre.name}</Button>
         </HStack>
         </ListItem>)}
